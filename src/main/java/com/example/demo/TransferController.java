@@ -9,8 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/transfers")
 public class TransferController {
 
+    private final TransferService transferService;
+
+    public TransferController(TransferService transferService) {
+        this.transferService = transferService;
+    }
+
     @PostMapping("/validate")
-    public TransferRequest validateTransfer(@RequestBody TransferRequest request) {
-        return request;
+    public TransferResponse validateTransfer(@RequestBody TransferRequest request) {
+        return transferService.validateTransfer(request);
     }
 }
